@@ -1,9 +1,11 @@
 namespace ModuloBackend;
 
-class Modulo {
+class Modulo
+{
     record Course(uint Id, string Name, string Code);
 
-    public static void Main(string[] args) {
+    public static void Main(string[] args)
+    {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
         WebApplication app = builder.Build();
 
