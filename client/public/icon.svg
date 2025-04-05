@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg width="50mm" height="50mm" viewBox="0 0 50 50" version="1.1" id="svg5"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:svg="http://www.w3.org/2000/svg">
+    <defs id="defs2">
+        <linearGradient id="linearGradient2102">
+            <stop style="stop-color:#63ddc4;stop-opacity:1;" offset="0" id="stop2098" />
+            <stop style="stop-color:#2870b3;stop-opacity:1;" offset="1" id="stop2100" />
+        </linearGradient>
+        <linearGradient id="linearGradient2092">
+            <stop style="stop-color:#5a707e;stop-opacity:1;" offset="0" id="stop2088" />
+            <stop style="stop-color:#08b4ce;stop-opacity:1;" offset="1" id="stop2090" />
+        </linearGradient>
+        <linearGradient id="linearGradient1925">
+            <stop style="stop-color:#1e8ed7;stop-opacity:1;" offset="0" id="stop1921" />
+            <stop style="stop-color:#86efff;stop-opacity:1;" offset="1" id="stop1923" />
+        </linearGradient>
+        <radialGradient xlink:href="#linearGradient1925" id="radialGradient1927" cx="-1.7763568e-14" cy="35.355339" fx="-1.7763568e-14" fy="35.355339" r="17.264027" gradientTransform="matrix(0.01061548,-2.0261157,2.0296993,0.01063422,-71.760706,34.979362)" gradientUnits="userSpaceOnUse" />
+        <radialGradient xlink:href="#linearGradient2092" id="radialGradient1927-8" cx="-1.7763568e-14" cy="35.355339" fx="-1.7763568e-14" fy="35.355339" r="17.264027" gradientTransform="matrix(0.00759965,-1.4505009,1.4530664,0.00761306,-51.373655,35.086178)" gradientUnits="userSpaceOnUse" />
+        <radialGradient xlink:href="#linearGradient2102" id="radialGradient2104" cx="28.885881" cy="21.636326" fx="28.885881" fy="21.636326" r="3.3155496" gradientTransform="matrix(2.6288213,-1.16039,1.439091,3.2602085,-83.73067,-11.83347)" gradientUnits="userSpaceOnUse" />
+    </defs>
+    <g id="layer1">
+        <rect style="fill:none;fill-opacity:1;stroke:url(#radialGradient1927);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:99;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" id="rect1148" width="32.028053" height="31.095198" x="-16.014027" y="19.807739" transform="rotate(-45)" />
+        <rect style="fill:none;fill-opacity:1;stroke:url(#radialGradient1927-8);stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:99;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" id="rect1148-5" width="22.928957" height="22.261124" x="-11.464478" y="24.224777" transform="rotate(-45)" />
+        <text xml:space="preserve" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.5149px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;white-space:pre;fill:url(#radialGradient2104);fill-opacity:1;stroke:#000000;stroke-width:0.312093;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.369492" x="17.213238" y="30.895811" id="text2096">
+            <tspan id="tspan2094" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.5149px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:url(#radialGradient2104);fill-opacity:1;stroke:#000000;stroke-width:0.312093;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.369492" x="17.213238" y="30.895811">M</tspan>
+        </text>
+    </g>
+</svg>
