@@ -1,53 +1,82 @@
-import { Navigate, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import ErrorPage from "./Pages/ErrorPage";
 import MainUI from "./MainUI";
-import ClassPage from "./Pages/ClassPage";
+import CoursePage from "./Pages/CoursePage";
 import LearnPage from "./Pages/LearnPage";
-import LearnModule from "./LearnModule";
+import LearnModule from "../../old.local/LearnModule";
 import GuidePage from "./Pages/GuidePage";
 import PracticePage from "./Pages/PracticePage";
-import PracticeModule from "./PracticeModule";
+import PracticeModule from "../../old.local/PracticeModule";
+import CoursesPage from "./Pages/CoursesPage";
+import LoginPage from "./Pages/LoginPage";
+import SignupPage from "./Pages/SignupPage";
 
 export const BROWSER_ROUTER = createBrowserRouter([
     {
         path: "/",
-        element: <Navigate to="/chemistry" />,
-        errorElement: <ErrorPage />,
+        element: <Navigate to="/login" />,
     },
     {
-        path: "/chemistry",
+        path: "/login",
         element: <MainUI />,
         errorElement: <ErrorPage />,
         children: [
             {
                 path: "",
-                element: <ClassPage />,
-                errorElement: <ErrorPage />,
+                element: <LoginPage />
+            }
+        ]
+    },
+    {
+        path: "/signup",
+        element: <MainUI />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: "",
+                element: <SignupPage />
+            }
+        ]
+    },
+    {
+        path: "/home",
+        element: <MainUI showAnnouncements />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: "",
+                element: <CoursesPage />
+            }
+        ]
+    },
+    {
+        path: "/:course",
+        element: <MainUI showAnnouncements showSidebar />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: "",
+                element: <CoursePage />
             },
             {
                 path: "learn",
-                element: <LearnPage />,
-                errorElement: <ErrorPage />,
+                element: <LearnPage />
             },
             {
                 path: "learn/:id",
-                element: <LearnModule />,
-                errorElement: <ErrorPage />,
+                element: <LearnModule />
             },
             {
                 path: "practice",
-                element: <PracticePage />,
-                errorElement: <ErrorPage />,
+                element: <PracticePage />
             },
             {
                 path: "practice/:id",
-                element: <PracticeModule />,
-                errorElement: <ErrorPage />,
+                element: <PracticeModule />
             },
             {
                 path: "guide",
-                element: <GuidePage />,
-                errorElement: <ErrorPage />,
+                element: <GuidePage />
             },
         ]
     }

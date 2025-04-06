@@ -1,26 +1,22 @@
 import * as MUI from "@mui/material";
-import { APP_NAME, CURRENT_CLASS } from "./Constants";
+import { APP_NAME } from "./Constants";
 import { NavigateNext } from "@mui/icons-material";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { LEARNING_OBJECTIVES } from "./Data";
 import NotificationsMenu from "./NotificationsMenu";
+import { PersistentStorage } from "./PersistentStorage";
 
-export default function Topbar() {
+export default function Topbar({ showAnnouncements = false }: TopbarProps) {
+    const navigate = useNavigate();
     const location = useLocation();
     const paths = ["", ...location.pathname.split('/').filter(p => p)];
 
     function formatPath(path: string): string {
         if (path.match(/\d+\.\d+/)) {
-            let objective = LEARNING_OBJECTIVES[path];
-            return `LO ${objective.id}: ${objective.title}`;
+            return `LO ${path}`;
         }
 
-        if (path === "chemistry") {
-            return CURRENT_CLASS;
-        }
-
-        path = path.charAt(0).toUpperCase() + path.substring(1);
+        path = path.includes('-') ? path.replace('-', ' ').toUpperCase() : path.charAt(0).toUpperCase() + path.substring(1);
         return path;
     }
 
@@ -32,17 +28,27 @@ export default function Topbar() {
         }
     }
 
+    function logout() {
+        PersistentStorage.delete("current_user");
+        navigate("/login");
+    }
+
     return (
         <MUI.AppBar sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}>
             <MUI.Toolbar>
-                <img src="/icon.svg" className="w-8 mr-3" />
-                <MUI.Typography variant="h5" className="mr-8">{APP_NAME}</MUI.Typography>
+                <img src="/icon.svg" className="w-8 mr-3" onClick={() => navigate("/")} />
+                <MUI.Typography variant="h5" className={!["/home", "/login", "/signup"].some(r => r === location.pathname) ? "mr-8 !text-blue-300 underline hover:cursor-pointer" : "mr-8"} onClick={() => navigate("/home")}>{APP_NAME}</MUI.Typography>
                 <MUI.Breadcrumbs separator={<NavigateNext />}>
                     {paths.map((path, i) => renderPath(path, i === paths.length - 1, paths.slice(0, i + 1).join("/")))}
                 </MUI.Breadcrumbs>
                 <div className="flex-1" />
-                <NotificationsMenu />
+                {PersistentStorage.has("current_user") && <MUI.Button onClick={logout}>Logout</MUI.Button>}
+                {showAnnouncements && <NotificationsMenu />}
             </MUI.Toolbar>
         </MUI.AppBar>
     );
+}
+
+export interface TopbarProps {
+    showAnnouncements?: boolean
 }

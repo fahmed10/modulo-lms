@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "../old.local/Data.tsx", "../old.local/PracticeModule.tsx", "../old.local/LearnModule.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

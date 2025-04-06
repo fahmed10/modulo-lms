@@ -1,7 +1,6 @@
 import * as MUI from "@mui/material";
 import { useLocation, useNavigate } from "react-router";
-import { CURRENT_CLASS } from "./Constants";
-import { SECTIONS } from "./Data";
+import { SECTIONS } from "../../old.local/Data";
 
 export default function Sidebar() {
     const navigate = useNavigate();
@@ -13,7 +12,7 @@ export default function Sidebar() {
             <MUI.Box>
                 <MUI.List>
                     <MUI.ListItem>
-                        <MUI.Typography variant="h6">{CURRENT_CLASS}</MUI.Typography>
+                        <MUI.Typography variant="h6">Sections</MUI.Typography>
                     </MUI.ListItem>
                     {Object.values(SECTIONS).map(section => (
                         <MUI.ListItem key={section.name}>

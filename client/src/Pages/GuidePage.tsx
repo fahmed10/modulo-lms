@@ -36,7 +36,7 @@ export default function GuidePage() {
                 <div className="h-2" />
                 <MathInput />
                 <div className="h-2" />
-                <Text>Questions and exercises will also accept numbers inputted in scientific notation. Use the <kbd>^</kbd> key to enter exponents.</Text>
+                <Text>Questions and exercises will also accept numbers input in scientific notation. Use the <kbd>^</kbd> key to enter exponents.</Text>
             </MUI.Paper>
         </MUI.Box>
     );

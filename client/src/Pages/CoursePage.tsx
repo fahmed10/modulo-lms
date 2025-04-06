@@ -1,16 +1,24 @@
 import * as MUI from "@mui/material";
-import { SECTIONS } from "../Data";
-import { useNavigate } from "react-router";
+import { SECTIONS } from "../../../old.local/Data";
+import { useNavigate, useParams } from "react-router";
 import { PageUtils } from "./PageUtils";
-import { CURRENT_CLASS } from "../Constants";
+import useAxiosData from "../hooks/useAxiosData";
+import { Api, Course } from "../Api";
 
-export default function ClassPage() {
+export default function CoursePage() {
     const navigate = useNavigate();
-    PageUtils.setTitle(CURRENT_CLASS);
+    const { course: courseId } = useParams();
+    const [course] = useAxiosData<Course>(() => Api.getCourse(courseId!));
+
+    if (!course) {
+        return;
+    }
+
+    PageUtils.setTitle(course.title);
 
     return (
         <MUI.Container>
-            <MUI.Typography variant="h4" textAlign="center" className="pb-4">Chemistry 1212K</MUI.Typography>
+            <MUI.Typography variant="h4" textAlign="center" className="pb-4">{course.title}</MUI.Typography>
             <MUI.Box className="flex flex-wrap gap-4 justify-center">
                 {Object.values(SECTIONS).map(section => (
                     <MUI.Card key={section.name} className="w-72 max-w-72">

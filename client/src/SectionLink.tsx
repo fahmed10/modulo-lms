@@ -1,4 +1,4 @@
-import { SECTIONS } from "./Data";
+import { SECTIONS } from "../../old.local/Data";
 import IconLink from "./IconLink";
 
 export default function SectionLink(props: { section: string }) {

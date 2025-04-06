@@ -1,15 +1,15 @@
 import * as MUI from "@mui/material";
-import Topbar from "./Topbar";
+import Topbar, { TopbarProps } from "./Topbar";
 import Sidebar from "./Sidebar";
 import { Outlet } from "react-router";
 
-export default function MainUI() {
+export default function MainUI({ showSidebar = false, showAnnouncements = false }: MainUIProps) {
     return (
         <>
             <MUI.Box className="flex">
-                <Topbar />
+                <Topbar showAnnouncements={showAnnouncements} />
                 <MUI.Toolbar />
-                <Sidebar />
+                {showSidebar && <Sidebar />}
             </MUI.Box>
             <MUI.Box className="flex mt-4 pl-[140px]">
                 <MUI.Toolbar />
@@ -17,4 +17,8 @@ export default function MainUI() {
             </MUI.Box>
         </>
     );
+}
+
+export interface MainUIProps extends TopbarProps {
+    showSidebar?: boolean
 }
