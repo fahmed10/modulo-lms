@@ -22,7 +22,7 @@ const authMiddleware: (...roles: Role[]) => Middleware = (...roles) => async (re
     }
 
     try {
-        let tokenData = jwt.verify(token, process.env.JWT_SECRET!) as { role: Role };
+        let tokenData = jwt.verify(token, process.env.JWT_SECRET!) as { role: Role, _id: string };
 
         if (!roles.includes(tokenData.role)) {
             failAuthentication(res);

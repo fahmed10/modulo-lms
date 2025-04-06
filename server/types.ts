@@ -8,7 +8,8 @@ declare global {
         interface Request {
             context: {
                 user: {
-                    role: string
+                    role: string,
+                    _id: string
                 }
             }
         }
