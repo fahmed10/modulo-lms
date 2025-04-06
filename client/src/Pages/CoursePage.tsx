@@ -1,5 +1,5 @@
 import * as MUI from "@mui/material";
-import { SECTIONS } from "../../../old.local/Data";
+import { SECTIONS } from "../Data";
 import { useNavigate, useParams } from "react-router";
 import { PageUtils } from "./PageUtils";
 import useAxiosData from "../hooks/useAxiosData";

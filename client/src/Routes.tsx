@@ -1,15 +1,13 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import ErrorPage from "./Pages/ErrorPage";
+import ErrorPage from "./pages/ErrorPage";
 import MainUI from "./MainUI";
-import CoursePage from "./Pages/CoursePage";
-import LearnPage from "./Pages/LearnPage";
-import LearnModule from "../../old.local/LearnModule";
-import GuidePage from "./Pages/GuidePage";
-import PracticePage from "./Pages/PracticePage";
-import PracticeModule from "../../old.local/PracticeModule";
-import CoursesPage from "./Pages/CoursesPage";
-import LoginPage from "./Pages/LoginPage";
-import SignupPage from "./Pages/SignupPage";
+import CoursePage from "./pages/CoursePage";
+import LearnPage from "./pages/LearnPage";
+import GuidePage from "./pages/GuidePage";
+import PracticePage from "./pages/PracticePage";
+import CoursesPage from "./pages/CoursesPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 export const BROWSER_ROUTER = createBrowserRouter([
     {
@@ -63,16 +61,8 @@ export const BROWSER_ROUTER = createBrowserRouter([
                 element: <LearnPage />
             },
             {
-                path: "learn/:id",
-                element: <LearnModule />
-            },
-            {
                 path: "practice",
                 element: <PracticePage />
-            },
-            {
-                path: "practice/:id",
-                element: <PracticeModule />
             },
             {
                 path: "guide",

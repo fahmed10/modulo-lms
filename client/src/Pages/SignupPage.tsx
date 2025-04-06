@@ -12,6 +12,11 @@ export default function SignupPage() {
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
+    if (PersistentStorage.has("current_user")) {
+        navigate("/home");
+        return;
+    }
+
     async function signup() {
         const { data } = await Api.signup(email, password, firstName, lastName);
 

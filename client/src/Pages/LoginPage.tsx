@@ -13,6 +13,11 @@ export default function LoginPage() {
     const [searchParams] = useSearchParams();
     const newAccount = searchParams.get("new_account");
 
+    if (PersistentStorage.has("current_user")) {
+        navigate("/home");
+        return;
+    }
+
     async function login() {
         const { data } = await Api.login(email, password);
 
