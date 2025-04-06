@@ -9,6 +9,7 @@ import CoursesPage from "./pages/CoursesPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import DependentRoute from "./DependentRoute";
+import LearnModule from "./modules/LearnModule";
 
 export const BROWSER_ROUTER = createBrowserRouter([
     {
@@ -59,7 +60,7 @@ export const BROWSER_ROUTER = createBrowserRouter([
             },
             {
                 path: "learn",
-                element: <LearnPage />
+                element: <LearnPage />,
             },
             {
                 path: "practice",
@@ -69,6 +70,10 @@ export const BROWSER_ROUTER = createBrowserRouter([
                 path: "guide",
                 element: <GuidePage />
             },
+            {
+                path: "learn/:id",
+                element: <LearnModule />
+            }
         ]
     }
 ]);

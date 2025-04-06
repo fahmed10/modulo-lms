@@ -46,5 +46,5 @@ export const Accordion = (props: React.PropsWithChildren<{ title: string }>) => 
 );
 
 export function renderSequential(showCount: number, ...elements: React.ReactNode[]): React.ReactNode[] {
-    return elements.slice(0, showCount).map((component, i) => <React.Fragment key={i}>{component}</React.Fragment>);
+    return elements.slice(0, showCount);
 }

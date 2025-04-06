@@ -14,7 +14,7 @@ export default function Topbar({ showAnnouncements = false }: TopbarProps) {
 
     function formatPath(path: string): string {
         if (path.match(/\d+\.\d+/)) {
-            return `LO ${path}`;
+            return `L.O. ${path}`;
         }
 
         path = path.includes('-') ? path.replace('-', ' ').toUpperCase() : path.charAt(0).toUpperCase() + path.substring(1);
