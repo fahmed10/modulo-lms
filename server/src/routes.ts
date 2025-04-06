@@ -24,7 +24,7 @@ router.delete("/announcements/:id", authMiddleware("admin"), async (req, res) =>
 });
 
 router.get("/courses", authMiddleware(), async (req, res) => {
-    res.json(await Courses.find());
+    res.json(await Courses.find().select("-learningObjectives"));
 });
 
 router.get("/courses/:id", authMiddleware(), async (req, res) => {
