@@ -1,4 +1,4 @@
-import { BookOutlined, HelpCenterOutlined, PendingActionsOutlined } from "@mui/icons-material";
+import { BookOutlined, HelpCenterOutlined } from "@mui/icons-material";
 
 export interface Section {
     name: string,
@@ -13,12 +13,6 @@ export const SECTIONS: { [key: string]: Section } = {
         path: "learn",
         icon: <BookOutlined />,
         description: "Complete learning objectives with guided learning activities.",
-    },
-    "Practice": {
-        name: "Practice",
-        path: "practice",
-        icon: <PendingActionsOutlined />,
-        description: "Practice learning objectives with randomly generated problems.",
     },
     "Guide": {
         name: "Guide",

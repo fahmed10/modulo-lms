@@ -3,8 +3,6 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { logging } from "../middleware/logging";
 import { router } from "./routes";
-import Courses from "../models/courses";
-import Users from "../models/users";
 
 const app = express();
 app.use(cors());

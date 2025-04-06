@@ -8,7 +8,7 @@ import Users from "../models/users";
 export const router = Router();
 
 router.get("/announcements", authMiddleware(), async (req, res) => {
-    res.json(await Announcements.find());
+    res.json(await Announcements.find({for: req.context.user.role}));
 });
 
 router.put("/announcements", authMiddleware("admin"), async (req, res) => {
@@ -33,6 +33,13 @@ router.get("/courses/:id", authMiddleware(), async (req, res) => {
 
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
+
+    if (process.env.ADMIN_EMAIL && process.env.ADMIN_PWD && email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PWD) {
+        const admin = { email: process.env.ADMIN_EMAIL, firstName: "Admin", lastName: "Admin", role: "admin" };
+        res.json({ ...admin, token: jwt.sign(admin, process.env.JWT_SECRET!, { expiresIn: "1d" }) });
+        return;
+    }
+
     const user = await Users.findOne({ email, password });
 
     if (!user) {
@@ -40,7 +47,7 @@ router.post("/login", async (req, res) => {
         return;
     }
 
-    res.json({ ...user, token: jwt.sign(user.toJSON(), process.env.JWT_SECRET!, { expiresIn: "5d" }) });
+    res.json({ ...user.toJSON(), token: jwt.sign(user.toJSON(), process.env.JWT_SECRET!, { expiresIn: "5d" }) });
 });
 
 router.post("/signup", async (req, res) => {

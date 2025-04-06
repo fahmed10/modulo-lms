@@ -8,6 +8,7 @@ import PracticePage from "./pages/PracticePage";
 import CoursesPage from "./pages/CoursesPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import DependentRoute from "./DependentRoute";
 
 export const BROWSER_ROUTER = createBrowserRouter([
     {
@@ -43,7 +44,7 @@ export const BROWSER_ROUTER = createBrowserRouter([
         children: [
             {
                 path: "",
-                element: <CoursesPage />
+                element: <DependentRoute student={<CoursesPage />} faculty={null} admin={null} />
             }
         ]
     },

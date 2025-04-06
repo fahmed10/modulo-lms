@@ -29,8 +29,9 @@ const authMiddleware: (...roles: Role[]) => Middleware = (...roles) => async (re
             return;
         }
 
-        req.params.$auth = tokenData as any;
+        req.context = { user: tokenData };
     } catch (e) {
+        console.error(e);
         failAuthentication(res);
         return;
     }

@@ -1,5 +1,5 @@
 import * as MUI from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Api } from "../Api";
 import { PersistentStorage } from "../PersistentStorage";
@@ -13,10 +13,11 @@ export default function LoginPage() {
     const [searchParams] = useSearchParams();
     const newAccount = searchParams.get("new_account");
 
-    if (PersistentStorage.has("current_user")) {
-        navigate("/home");
-        return;
-    }
+    useEffect(() => {
+        if (PersistentStorage.has("current_user")) {
+            navigate("/home");
+        }
+    }, []);
 
     async function login() {
         const { data } = await Api.login(email, password);

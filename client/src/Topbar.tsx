@@ -10,6 +10,7 @@ export default function Topbar({ showAnnouncements = false }: TopbarProps) {
     const navigate = useNavigate();
     const location = useLocation();
     const paths = ["", ...location.pathname.split('/').filter(p => p)];
+    const currentUser = PersistentStorage.get("current_user");
 
     function formatPath(path: string): string {
         if (path.match(/\d+\.\d+/)) {
@@ -42,7 +43,8 @@ export default function Topbar({ showAnnouncements = false }: TopbarProps) {
                     {paths.map((path, i) => renderPath(path, i === paths.length - 1, paths.slice(0, i + 1).join("/")))}
                 </MUI.Breadcrumbs>
                 <div className="flex-1" />
-                {PersistentStorage.has("current_user") && <MUI.Button onClick={logout}>Logout</MUI.Button>}
+                {currentUser && <MUI.Typography className="!mr-2">Logged in as {currentUser.name}</MUI.Typography>}
+                {currentUser && <MUI.Button onClick={logout}>Logout</MUI.Button>}
                 {showAnnouncements && <NotificationsMenu />}
             </MUI.Toolbar>
         </MUI.AppBar>

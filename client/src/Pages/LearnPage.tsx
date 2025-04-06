@@ -3,6 +3,7 @@ import { PageUtils } from "./PageUtils";
 
 export default function LearnPage() {
     PageUtils.setTitle("Learn");
+    
 
     return (
         <MUI.Container className="!max-w-[110ch]">
