@@ -3,7 +3,7 @@ import { req } from "./utils";
 
 interface DataBlock {}
 
-export const DataBlock = new mongoose.Schema({block: req(String), type: String, value: String, exercise: String, prefix: String, answers: [String], body: [{block: req(String), type: req(String), value: req(String)}]});
+export const DataBlock = new mongoose.Schema({block: req(String), type: String, value: String, exercise: String, completedBy: [String], title: String, prefix: String, answers: [String], body: [{block: req(String), type: req(String), value: req(String)}]});
 
 interface TextBlock extends DataBlock {
     block: "text",
