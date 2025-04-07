@@ -2,29 +2,31 @@ import { useState } from "react";
 import { EditableMathField } from "react-mathquill";
 import { Chem } from "./Chem";
 
-export default function MathInput(props: MathInputProps) {
-    const [latex, setLatex] = useState(props.defaultLatex ?? "");
+export default function MathInput({editable = true, defaultLatex = "", output}: MathInputProps) {
+    const [latex, setLatex] = useState(defaultLatex);
     const [_, setText] = useState("");
 
-    return (
-        <EditableMathField style={{ maxWidth: "100%", pointerEvents: (props.editable ?? true) ? "auto" : "none", color: (props.editable ?? true) ? "white" : "darkgray" }} latex={latex} onChange={(field) => {
-            if (field.latex().includes("->") || field.latex().includes("<>")) {
-                field.latex(field.latex().replaceAll("<>", Chem.eqArrow).replaceAll("->", Chem.arrow));
-            }
-            if (props.editable === false && field.latex() !== latex) {
-                field.latex(latex);
-                return;
-            }
-            if (props.output === undefined) {
-                return;
-            }
+    function onInputChange(field: any) {
+        if (field.latex().includes("->") || field.latex().includes("<>")) {
+            field.latex(field.latex().replaceAll("<>", Chem.eqArrow).replaceAll("->", Chem.arrow));
+        }
+        
+        if (editable === false && field.latex() !== latex) {
+            field.latex(latex);
+            return;
+        }
 
-            setLatex(field.latex());
-            setText(field.text());
-            props.output.latex = field.latex();
-            props.output.text = field.text();
-        }} />
-    );
+        if (output === undefined) {
+            return;
+        }
+
+        setLatex(field.latex());
+        setText(field.text());
+        output.latex = field.latex();
+        output.text = field.text();
+    }
+
+    return <EditableMathField style={{ maxWidth: "100%", pointerEvents: editable ? "auto" : "none", color: editable ? "white" : "darkgray" }} latex={latex} onChange={onInputChange} />;
 }
 
 export interface MathInputProps {

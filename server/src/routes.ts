@@ -36,35 +36,34 @@ router.get("/courses/:cId/modules/:oId/exercises", authMiddleware(), async (req,
     const { cId, oId } = req.params;
     const course = (await Courses.findOne({ courseId: cId }))!;
     const objective = (course.learningObjectives as any as any[]).find<LearningObjective>((lo: any): lo is LearningObjective => `${lo.chapter.number}.${lo.id}` === oId)!;
-    const exercises: boolean[] = [];
+    const exercises: string[] = [];
 
     objective.dataBlocks.forEach(dataBlock => {
         if (dataBlock.block === "exercise") {
-            exercises.push(dataBlock.completedBy?.includes(req.context.user._id) ?? false);
+            exercises.push((dataBlock.completedBy?.includes(req.context.user._id) ?? false) ? "correct" : "unanswered");
         }
     });
 
     res.json(exercises);
 });
 
-router.post("/courses/:cId/modules/:oId/exercises/:eId", authMiddleware(), async (req, res) => {
+router.post("/courses/:cId/modules/:oId/exercises/:eId/answer", authMiddleware(), async (req, res) => {
     const { cId, oId, eId } = req.params;
+    const { answer } = req.body;
     const course = (await Courses.findOne({ courseId: cId }))!;
     const objective = (course.learningObjectives as any as any[]).find<LearningObjective>((lo: any): lo is LearningObjective => `${lo.chapter.number}.${lo.id}` === oId)!;
 
-    let exerciseNumber = 1;
-    objective.dataBlocks.forEach(dataBlock => {
-        if (dataBlock.block === "exercise") {
-            if (exerciseNumber === Number(eId)) {
-                dataBlock.completedBy ??= [];
-                dataBlock.completedBy.push(req.context.user._id);
-            }
-            exerciseNumber++;
-        }
-    });
+    const dataBlock = objective.dataBlocks.filter(d => d.block === "exercise")[Number(eId) - 1];
+    if (dataBlock.answers.includes(answer)) {
+        dataBlock.completedBy ??= [];
+        dataBlock.completedBy.push(req.context.user._id);
+    } else {
+        res.json({ correct: false })
+        return;
+    }
 
     await course.save();
-    res.sendStatus(200);
+    res.json({ correct: true });
 });
 
 router.post("/login", async (req, res) => {

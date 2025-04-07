@@ -86,5 +86,5 @@ export const Api = {
     login: (email: string, password: string) => api.post("login", { email, password }),
     signup: (email: string, password: string, firstName: string, lastName: string) => api.post("signup", {email, password, firstName, lastName}),
     getExerciseStates: (courseId: Value, objectiveId: Value) => api.get(`/courses/${courseId}/modules/${objectiveId}/exercises`),
-    markExerciseComplete: (courseId: Value, objectiveId: Value, exerciseId: Value) => api.post(`/courses/${courseId}/modules/${objectiveId}/exercises/${exerciseId}`),
+    answerExercise: (courseId: Value, objectiveId: Value, exerciseId: Value, answer: string) => api.post(`/courses/${courseId}/modules/${objectiveId}/exercises/${exerciseId}/answer`, { answer }),
 };

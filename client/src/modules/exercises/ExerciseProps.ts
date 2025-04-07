@@ -4,8 +4,9 @@ export interface ExerciseProps {
     title: string,
     number?: number,
     question?: boolean,
-    completed?: boolean,
-    onAnswered?: (correct: boolean) => void,
+    state?: ExerciseState,
+    onAnswered?: (answer: string) => void,
 }
 
+export type ExerciseState = "correct" | "incorrect" | "unanswered";
 export type ExerciseUnionProps = MathExerciseProps;

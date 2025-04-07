@@ -6,8 +6,9 @@ import { Api, Course, type DataBlocks } from "../Api";
 import { ChemBlock, ChemIn, MathIn, Header, MathBlock, Text, renderSequential } from "./Components";
 import MathExercise from "./exercises/MathExercise";
 import { useEffect, useState } from "react";
+import { ExerciseState } from "./exercises/ExerciseProps";
 
-let currentCourseId: string, currentObjectiveId: string, currentExerciseStates: boolean[] = [], refreshComponent: () => void;
+let currentCourseId: string, currentObjectiveId: string, currentExerciseStates: ExerciseState[] = [], refreshComponent: () => void;
 
 export default function LearnModule() {
     const { course: courseId, id } = useParams();
@@ -18,7 +19,7 @@ export default function LearnModule() {
 
     useEffect(() => {
         currentExerciseStates = exerciseStates;
-        refresh([]);
+        refreshComponent();
     }, [exerciseStates]);
 
     if (!course) {
@@ -55,7 +56,7 @@ export default function LearnModule() {
                 <MUI.Typography variant="subtitle1" color="text.secondary" textAlign="center">{objective.description}</MUI.Typography>
                 <MUI.Divider className="pt-2 !mb-[-0.5rem]" />
                 <MUI.Box className="p-1 px-2">
-                    {renderSequential((currentExerciseStates ?? exerciseStates).filter(e => e).length + 1, ...dataSequence)}
+                    {renderSequential((currentExerciseStates ?? exerciseStates).filter(e => e === "correct").length + 1, ...dataSequence)}
                 </MUI.Box>
             </MUI.Paper>
         </MUI.Box>
@@ -92,7 +93,7 @@ function DataBlocks({ data }: { data: DataBlocks[] }) {
         } else if (dataBlock.block === "exercise") {
             const exercise = exerciseNumber;
             if (dataBlock.exercise === "math") {
-                return <MathExercise {...dataBlock} onAnswered={c => onExerciseAnswered(exercise, c)} completed={currentExerciseStates[exerciseNumber - 1]} number={exerciseNumber++}>
+                return <MathExercise {...dataBlock} onAnswered={c => onExerciseAnswered(exercise, c)} state={currentExerciseStates[exerciseNumber - 1] ?? "unanswered"} number={exerciseNumber++}>
                     <DataBlocks data={dataBlock.body} />
                 </MathExercise>
             }
@@ -100,12 +101,8 @@ function DataBlocks({ data }: { data: DataBlocks[] }) {
     });
 }
 
-function onExerciseAnswered(exerciseId: number, correct: boolean) {
-    if (!correct) {
-        return;
-    }
-
-    Api.markExerciseComplete(currentCourseId, currentObjectiveId, exerciseId);
-    currentExerciseStates[exerciseId - 1] = true;
+async function onExerciseAnswered(exerciseId: number, answer: string) {
+    const { correct } = (await Api.answerExercise(currentCourseId, currentObjectiveId, exerciseId, answer)).data;
+    currentExerciseStates[exerciseId - 1] = correct ? "correct" : "incorrect";
     refreshComponent();
 }
