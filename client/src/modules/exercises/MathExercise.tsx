@@ -24,6 +24,40 @@ export default function MathExercise(props: React.PropsWithChildren<MathExercise
         return message;
     }
 
+    function onAnswer() {
+        let input = standardizeMathText(answer.text);
+
+        // Handle scientific notation
+        let match = input.match(/(\d+\.?\d*)\*10\^(-?\d+)/);
+        if (match) {
+            input = (BigNumber(match[1]).times(BigNumber(10).pow(BigNumber(match[2])))).toString();
+        }
+
+        if (props.mapAnswer) {
+            input = props.mapAnswer(input);
+        }
+
+        setLastInput(input);
+
+        if (props.answers.map(a => a.replaceAll(/(<u>|<\/u>)/g, "")).includes(input)) {
+            setExerciseFailed(false);
+            setExerciseCompleted(true);
+            if (props.onAnswered) {
+                props.onAnswered(true);
+            }
+        } else {
+            setExerciseFailed(true);
+            if (props.onAnswered) {
+                props.onAnswered(false);
+            }
+        }
+
+        if (props.question) {
+            setExerciseCompleted(true);
+        }
+    }
+
+
     return (
         <MUI.Box className="mt-5 mb-1">
             <ExerciseHeader {...props} completed={exerciseFinished} />
@@ -33,38 +67,7 @@ export default function MathExercise(props: React.PropsWithChildren<MathExercise
             <MathInput editable={!exerciseCompleted} output={answer} />
             <MathIn equation={"\\text{ }" + (props.suffix ?? "")} />
             <br />
-            <MUI.Button disabled={exerciseCompleted} variant="contained" className="!p-1 !mt-4 !mb-2" onClick={() => {
-                let input = standardizeMathText(answer.text);
-
-                // Handle scientific notation
-                let match = input.match(/(\d+\.?\d*)\*10\^(-?\d+)/);
-                if (match) {
-                    input = (BigNumber(match[1]).times(BigNumber(10).pow(BigNumber(match[2])))).toString();
-                }
-
-                if (props.mapAnswer) {
-                    input = props.mapAnswer(input);
-                }
-
-                setLastInput(input);
-
-                if (props.answers.map(a => a.replaceAll(/(<u>|<\/u>)/g, "")).includes(input)) {
-                    setExerciseFailed(false);
-                    setExerciseCompleted(true);
-                    if (props.onAnswered) {
-                        props.onAnswered(true);
-                    }
-                } else {
-                    setExerciseFailed(true);
-                    if (props.onAnswered) {
-                        props.onAnswered(false);
-                    }
-                }
-
-                if (props.question) {
-                    setExerciseCompleted(true);
-                }
-            }}>Submit</MUI.Button>
+            <MUI.Button disabled={exerciseCompleted} variant="contained" className="!p-1 !mt-4 !mb-2" onClick={onAnswer}>Submit</MUI.Button>
             {completedCorrectly && <MUI.Alert severity="success">Correct!</MUI.Alert>}
             {exerciseFailed && <MUI.Alert severity="error">Incorrect. {!props.failedMessage ? "" : renderRichIfString(props.failedMessage(lastInput))}</MUI.Alert>}
         </MUI.Box>
