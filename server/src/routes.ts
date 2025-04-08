@@ -58,12 +58,12 @@ router.post("/courses/:cId/modules/:oId/exercises/:eId/answer", authMiddleware()
         dataBlock.completedBy ??= [];
         dataBlock.completedBy.push(req.context.user._id);
     } else {
-        res.sendStatus(400);
+        res.json({ correct: false })
         return;
     }
 
     await course.save();
-    res.sendStatus(200);
+    res.json({ correct: true });
 });
 
 router.post("/login", async (req, res) => {
