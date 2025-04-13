@@ -6,7 +6,11 @@ import Loading from "../Loading";
 
 export default function CoursesPage() {
     const navigate = useNavigate();
-    const [courses] = useAxiosData<Course[]>(Api.getCourses, []);
+    const [courses, loaded] = useAxiosData<Course[]>(Api.getCourses, []);
+
+    if (!loaded) {
+        return <Loading />;
+    }
 
     return (
         <MUI.Container>

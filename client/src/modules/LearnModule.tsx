@@ -7,13 +7,15 @@ import { ChemBlock, ChemIn, MathIn, Header, MathBlock, Text, renderSequential } 
 import MathExercise from "./exercises/MathExercise";
 import { useEffect, useState } from "react";
 import { ExerciseState } from "./exercises/ExerciseProps";
+import Loading from "../Loading";
 
 let currentCourseId: string, currentObjectiveId: string, currentExerciseStates: ExerciseState[] = [], refreshComponent: () => void;
 
 export default function LearnModule() {
     const { course: courseId, id } = useParams();
+    const navigate = useNavigate();
     const [exerciseStates, setExerciseStates] = useState([]);
-    const [course] = useAxiosData<Course>(() => Api.getCourse(courseId!), undefined, () => Api.getExerciseStates(courseId!, id!).then(({ data }) => setExerciseStates(data)));
+    const [course, loaded] = useAxiosData<Course>(() => Api.getCourse(courseId!), undefined, () => Api.getExerciseStates(courseId!, id!).then(({ data }) => setExerciseStates(data)));
     const [, refresh] = useState([]);
     refreshComponent = () => refresh([]);
 
@@ -22,7 +24,12 @@ export default function LearnModule() {
         refreshComponent();
     }, [exerciseStates]);
 
+    if (!loaded) {
+        return <Loading />;
+    }
+
     if (!course) {
+        navigate("/");
         return;
     }
 

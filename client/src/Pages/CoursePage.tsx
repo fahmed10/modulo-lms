@@ -4,13 +4,19 @@ import { useNavigate, useParams } from "react-router";
 import { PageUtils } from "./PageUtils";
 import useAxiosData from "../hooks/useAxiosData";
 import { Api, Course } from "../Api";
+import Loading from "../Loading";
 
 export default function CoursePage() {
     const navigate = useNavigate();
     const { course: courseId } = useParams();
-    const [course] = useAxiosData<Course>(() => Api.getCourse(courseId!));
+    const [course, loaded] = useAxiosData<Course>(() => Api.getCourse(courseId!));
+
+    if (!loaded) {
+        return <Loading />;
+    }
 
     if (!course) {
+        navigate("/");
         return;
     }
 
