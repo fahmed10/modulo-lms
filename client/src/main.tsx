@@ -26,7 +26,7 @@ createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <MUI.ThemeProvider theme={theme}>
             <MUI.CssBaseline />
-            <RouterProvider router={BROWSER_ROUTER} />
+            <RouterProvider router={BROWSER_ROUTER} future={{ v7_startTransition: true }} />
         </MUI.ThemeProvider>
     </React.StrictMode>,
 );

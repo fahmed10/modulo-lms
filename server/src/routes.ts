@@ -29,7 +29,7 @@ router.get("/courses", authMiddleware(), async (req, res) => {
 });
 
 router.get("/courses/:id", authMiddleware(), async (req, res) => {
-    res.json(await Courses.findOne({ courseId: req.params.id }));
+    res.json(await Courses.findOne({ code: req.params.id }));
 });
 
 router.get("/courses/:cId/modules/:oId/exercises", authMiddleware(), async (req, res) => {

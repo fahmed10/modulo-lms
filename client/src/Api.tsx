@@ -39,7 +39,8 @@ export interface Announcement extends MongoObject {
 
 export interface Course extends MongoObject {
     title: string,
-    courseId: string,
+    code: string,
+    codeLong: string,
     learningObjectives: LearningObjective[]
 }
 

@@ -4,7 +4,8 @@ import { LearningObjective } from "./learningObjective";
 
 const Courses = mongoose.model("Courses", new mongoose.Schema({
   title: req(String),
-  courseId: req(String, true),
+  code: req(String, true),
+  codeLong: req(String, true),
   learningObjectives: req([LearningObjective])
 }));
 
