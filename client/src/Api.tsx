@@ -26,6 +26,8 @@ api.interceptors.response.use(response => response, errorResponse => {
     return Promise.reject(errorResponse);
 });
 
+export type UserRole = "student" | "faculty" | "admin";
+
 export interface MongoObject {
     _id: string
 }

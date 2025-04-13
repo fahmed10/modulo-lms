@@ -1,3 +1,5 @@
+import { UserRole } from "./Api";
+
 export abstract class PersistentStorage {
     public static has(key: PersistentStorageKey) {
         return localStorage.getItem(key) !== null;
@@ -25,5 +27,5 @@ export abstract class PersistentStorage {
 export type PersistentStorageKey = "notifications_read" | "current_user";
 type StoreMap = {
     "notifications_read": string[],
-    "current_user": { role: "admin" | "faculty" | "student", name: string, token: string }
+    "current_user": { role: UserRole, name: string, token: string }
 }
