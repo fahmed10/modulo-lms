@@ -19,6 +19,7 @@ api.interceptors.request.use(config => {
 
 api.interceptors.response.use(response => response, errorResponse => {
     if (errorResponse.status === 403) {
+        PersistentStorage.delete("current_user");
         window.location.href = "/login";
     }
     
