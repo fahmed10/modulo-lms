@@ -3,6 +3,7 @@ import { Api, Course } from "../Api";
 import useAxiosData from "../hooks/useAxiosData";
 import { useNavigate } from "react-router";
 import Loading from "../Loading";
+import PageContainer from "./PageContainer";
 
 export default function CoursesPage() {
     const navigate = useNavigate();
@@ -13,9 +14,7 @@ export default function CoursesPage() {
     }
 
     return (
-        <MUI.Container>
-            <MUI.Typography variant="h4" textAlign="center" className="pb-4">Courses</MUI.Typography>
-            <MUI.Box className="flex flex-wrap gap-4 justify-center">
+        <PageContainer title="Courses">
                 {Object.values(courses).map(course => (
                     <MUI.Card key={course._id} className="w-72 max-w-72">
                         <MUI.CardContent>
@@ -27,7 +26,6 @@ export default function CoursesPage() {
                         </MUI.CardActions>
                     </MUI.Card>
                 ))}
-            </MUI.Box>
-        </MUI.Container>
+        </PageContainer>
     );
 }

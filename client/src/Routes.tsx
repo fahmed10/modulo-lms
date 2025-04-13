@@ -3,7 +3,6 @@ import ErrorPage from "./pages/ErrorPage";
 import MainUI from "./MainUI";
 import LearnPage from "./pages/LearnPage";
 import GuidePage from "./pages/GuidePage";
-import PracticePage from "./pages/PracticePage";
 import CoursesPage from "./pages/CoursesPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -57,10 +56,6 @@ export const BROWSER_ROUTER = createBrowserRouter([
             {
                 path: "learn",
                 element: <LearnPage />,
-            },
-            {
-                path: "practice",
-                element: <PracticePage />
             },
             {
                 path: "guide",

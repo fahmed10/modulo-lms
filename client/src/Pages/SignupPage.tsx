@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Api } from "../Api";
 import { PersistentStorage } from "../PersistentStorage";
+import PageContainer from "./PageContainer";
 
 export default function SignupPage() {
     const [email, setEmail] = useState("");
@@ -29,28 +30,25 @@ export default function SignupPage() {
     }
 
     return (
-        <MUI.Container>
-            <MUI.Typography variant="h4" textAlign="center" className="pb-4">Student Sign-Up</MUI.Typography>
-            <MUI.Box className="flex flex-wrap gap-4 justify-center max-w-100 mx-auto">
-                <MUI.Card className="flex flex-col gap-4 p-8">
-                    <div className="flex gap-4">
-                        <MUI.TextField value={firstName} onChange={e => setFirstName(e.target.value)} type="text" label="First Name" />
-                        <MUI.TextField value={lastName} onChange={e => setLastName(e.target.value)} type="text" label="Last Name" />
-                    </div>
-                    <MUI.TextField value={email} onChange={e => setEmail(e.target.value)} type="email" label="Email" />
-                    <MUI.TextField value={password} onChange={e => setPassword(e.target.value)} type="password" label="Password" />
-                    <MUI.Typography color="text.secondary">
-                        Already have an account? Log in <MUI.Link className="hover:cursor-pointer" onClick={() => navigate("/login")}>here</MUI.Link>.
-                    </MUI.Typography>
-                    <MUI.Typography color="text.secondary">
-                        Faculty, contact your administrator for your account login.
-                    </MUI.Typography>
-                    {error && <MUI.Alert severity="error">
-                        {error}
-                    </MUI.Alert>}
-                    <MUI.Button variant="contained" onClick={signup}>Sign up</MUI.Button>
-                </MUI.Card>
-            </MUI.Box>
-        </MUI.Container>
+        <PageContainer className="max-w-100 mx-auto" title="Student Sign-Up">
+            <MUI.Card className="flex flex-col gap-4 p-8">
+                <div className="flex gap-4">
+                    <MUI.TextField value={firstName} onChange={e => setFirstName(e.target.value)} type="text" label="First Name" />
+                    <MUI.TextField value={lastName} onChange={e => setLastName(e.target.value)} type="text" label="Last Name" />
+                </div>
+                <MUI.TextField value={email} onChange={e => setEmail(e.target.value)} type="email" label="Email" />
+                <MUI.TextField value={password} onChange={e => setPassword(e.target.value)} type="password" label="Password" />
+                <MUI.Typography color="text.secondary">
+                    Already have an account? Log in <MUI.Link className="hover:cursor-pointer" onClick={() => navigate("/login")}>here</MUI.Link>.
+                </MUI.Typography>
+                <MUI.Typography color="text.secondary">
+                    Faculty, contact your administrator for your account login.
+                </MUI.Typography>
+                {error && <MUI.Alert severity="error">
+                    {error}
+                </MUI.Alert>}
+                <MUI.Button variant="contained" onClick={signup}>Sign up</MUI.Button>
+            </MUI.Card>
+        </PageContainer>
     )
 }
