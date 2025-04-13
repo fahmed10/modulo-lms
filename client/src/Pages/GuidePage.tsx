@@ -22,12 +22,6 @@ export default function GuidePage() {
                     completed. Learning activities will save your progress.
                 </Text>
 
-                <Header>Practice</Header>
-                <Text>
-                    The <SectionLink section="Practice" /> section allows you to practice learning objectives
-                    with randomly generated questions.
-                </Text>
-
                 <Header>Math Input</Header>
                 <Text>
                     Use the <kbd>/</kbd> key to enter fractions. Subscripts can be entered by typing an underscore. Forward arrows can be typed by entering '-&gt;' and equilibrium arrows can typed by entering '&lt;&gt;'. The delta symbol can be entered by pressing <kbd>\</kbd> and then typing Delta, then pressing <kbd>Enter</kbd>.

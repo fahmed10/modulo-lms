@@ -16,7 +16,7 @@ export default function Sidebar() {
                     </MUI.ListItem>
                     {Object.values(SECTIONS).map(section => (
                         <MUI.ListItem key={section.name}>
-                            <MUI.ListItemButton onClick={() => navigate(section.path)} className={"!rounded-md" + (location.pathname.replace(/\/+$/, "") === section.path ? " !outline !outline-gray-200" : "")}>
+                            <MUI.ListItemButton onClick={() => navigate(section.path)} className={"!rounded-md" + (location.pathname.includes(`/${section.path}`) ? " !outline !outline-gray-200" : "")}>
                                 <MUI.ListItemIcon>{section.icon}</MUI.ListItemIcon>
                                 <MUI.ListItemText>{section.name}</MUI.ListItemText>
                             </MUI.ListItemButton>

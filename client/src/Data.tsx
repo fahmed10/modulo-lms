@@ -7,7 +7,7 @@ export interface Section {
     description: string,
 }
 
-export const SECTIONS: { [key: string]: Section } = {
+export const SECTIONS = {
     "Learn": {
         name: "Learn",
         path: "learn",
