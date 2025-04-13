@@ -1,7 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
 import MainUI from "./MainUI";
-import CoursePage from "./pages/CoursePage";
 import LearnPage from "./pages/LearnPage";
 import GuidePage from "./pages/GuidePage";
 import PracticePage from "./pages/PracticePage";
@@ -10,12 +9,9 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import DependentRoute from "./DependentRoute";
 import LearnModule from "./modules/LearnModule";
+import CoursePage from "./pages/CoursePage";
 
 export const BROWSER_ROUTER = createBrowserRouter([
-    {
-        path: "/",
-        element: <Navigate to="/login" />,
-    },
     {
         path: "/login",
         element: <MainUI />,
@@ -44,7 +40,7 @@ export const BROWSER_ROUTER = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "",
+                index: true,
                 element: <DependentRoute student={<CoursesPage />} faculty={null} admin={null} />
             }
         ]
@@ -55,7 +51,7 @@ export const BROWSER_ROUTER = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "",
+                index: true,
                 element: <CoursePage />
             },
             {
@@ -75,5 +71,9 @@ export const BROWSER_ROUTER = createBrowserRouter([
                 element: <LearnModule />
             }
         ]
-    }
+    },
+    {
+        index: true,
+        element: <Navigate to="/home" />
+    },
 ]);
