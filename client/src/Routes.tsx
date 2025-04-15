@@ -65,6 +65,10 @@ export const BROWSER_ROUTER = createBrowserRouter([
             {
                 path: "learn/:id",
                 element: <LearnModule />
+            },
+            {
+                path: "manage-activities",
+                element: <EditLearnPage />
             }
         ]
     },
