@@ -9,6 +9,7 @@ import SignupPage from "./pages/SignupPage";
 import DependentRoute from "./DependentRoute";
 import LearnModule from "./modules/LearnModule";
 import CoursePage from "./pages/CoursePage";
+import EditLearnPage from "./Pages/EditLearnPage";
 
 export const BROWSER_ROUTER = createBrowserRouter([
     {
@@ -40,18 +41,18 @@ export const BROWSER_ROUTER = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <DependentRoute student={<CoursesPage />} faculty={null} admin={null} />
+                element: <DependentRoute student={<CoursesPage />} faculty={<CoursesPage faculty />} admin={null} />
             }
         ]
     },
     {
         path: "/:course",
-        element: <MainUI showAnnouncements showSidebar />,
+        element: <DependentRoute student={<MainUI showAnnouncements showSidebar />} faculty={<MainUI showAnnouncements showSidebar faculty />} />,
         errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
-                element: <CoursePage />
+                element: <DependentRoute student={<CoursePage />} faculty={<CoursePage faculty />} />
             },
             {
                 path: "learn",

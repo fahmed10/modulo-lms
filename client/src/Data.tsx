@@ -1,4 +1,4 @@
-import { BookOutlined, HelpCenterOutlined } from "@mui/icons-material";
+import { BookOnlineOutlined, BookOutlined, HelpCenterOutlined } from "@mui/icons-material";
 
 export interface Section {
     name: string,
@@ -20,4 +20,13 @@ export const SECTIONS = {
         icon: <HelpCenterOutlined />,
         description: "Learn how to use the website. Recommended for first-time users.",
     },
+}
+
+export const FACULTY_SECTIONS = {
+    "Manage": {
+        name: "Manage Activities",
+        path: "manage-activities",
+        icon: <BookOutlined />,
+        description: "View, create, edit, and delete chapters and learning activities.",
+    }
 }

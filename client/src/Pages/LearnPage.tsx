@@ -38,7 +38,7 @@ export default function LearnPage() {
                         <MUI.Box className="flex flex-col gap-2 pt-2">
                             {group.map(objective => (
                                 <GridCard key={objective.id}>
-                                    <MUI.Typography className="">L.O. {objective.id}: {objective.title}</MUI.Typography>
+                                    <MUI.Typography>L.O. {objective.id}: {objective.title}</MUI.Typography>
                                     <div className="flex-1" />
                                     <MUI.Button className="h-6" onClick={() => navigate(`${objective.chapter.number}.${objective.id}`)}>Open</MUI.Button>
                                 </GridCard>

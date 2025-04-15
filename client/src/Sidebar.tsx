@@ -1,8 +1,8 @@
 import * as MUI from "@mui/material";
 import { useLocation, useNavigate } from "react-router";
-import { SECTIONS } from "./Data";
+import { FACULTY_SECTIONS, SECTIONS } from "./Data";
 
-export default function Sidebar() {
+export default function Sidebar({ faculty = false }: { faculty?: boolean }) {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -14,7 +14,7 @@ export default function Sidebar() {
                     <MUI.ListItem>
                         <MUI.Typography variant="h6">Sections</MUI.Typography>
                     </MUI.ListItem>
-                    {Object.values(SECTIONS).map(section => (
+                    {Object.values(faculty ? FACULTY_SECTIONS : SECTIONS).map(section => (
                         <MUI.ListItem key={section.name}>
                             <MUI.ListItemButton onClick={() => navigate(section.path)} className={"!rounded-md" + (location.pathname.includes(`/${section.path}`) ? " !outline !outline-gray-200" : "")}>
                                 <MUI.ListItemIcon>{section.icon}</MUI.ListItemIcon>
