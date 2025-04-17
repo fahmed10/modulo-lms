@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 import { req } from "./utils";
-import { LearningObjective } from "./learningObjective";
+import { Chapter } from "./chapter";
 
 const Courses = mongoose.model("Courses", new mongoose.Schema({
   title: req(String),
   code: req(String, true),
   codeLong: req(String, true),
-  learningObjectives: req([LearningObjective])
+  chapters: req([Chapter])
 }));
 
 export default Courses;

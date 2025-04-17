@@ -41,11 +41,16 @@ export interface Course extends MongoObject {
     title: string,
     code: string,
     codeLong: string,
+    chapters: Chapter[]
+}
+
+export interface Chapter {
+    number: number,
+    name: string,
     learningObjectives: LearningObjective[]
 }
 
-export interface LearningObjective extends MongoObject {
-    chapter: { number: number, name: string },
+export interface LearningObjective {
     id: number,
     title: string,
     description: string,
@@ -83,10 +88,10 @@ type Value = string | number;
 export const Api = {
     getAnnouncements: () => api.get("announcements"),
     createAnnouncement: (data: Announcement) => api.put("announcements", data),
-    updateAnnouncement: (id: Value) => api.patch(`announcements/${id}`),
-    deleteAnnouncement: (id: Value) => api.delete(`announcements/${id}`),
+    updateAnnouncement: (id: string, data: Announcement) => api.patch(`announcements/${id}`, data),
+    deleteAnnouncement: (id: string) => api.delete(`announcements/${id}`),
     getCourses: () => api.get("courses"),
-    getCourse: (id: Value) => api.get(`courses/${id}`),
+    getCourse: (id: string) => api.get(`courses/${id}`),
     login: (email: string, password: string) => api.post("login", { email, password }),
     signup: (email: string, password: string, firstName: string, lastName: string) => api.post("signup", {email, password, firstName, lastName}),
     getExerciseStates: (courseId: Value, objectiveId: Value) => api.get(`/courses/${courseId}/modules/${objectiveId}/exercises`),
