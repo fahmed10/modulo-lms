@@ -92,6 +92,7 @@ export const Api = {
     deleteAnnouncement: (id: string) => api.delete(`announcements/${id}`),
     getCourses: () => api.get("courses"),
     getCourse: (id: string) => api.get(`courses/${id}`),
+    updateCourse: (id: string, data: Course) => api.patch(`courses/${id}`, data),
     login: (email: string, password: string) => api.post("login", { email, password }),
     signup: (email: string, password: string, firstName: string, lastName: string) => api.post("signup", {email, password, firstName, lastName}),
     getExerciseStates: (courseId: Value, objectiveId: Value) => api.get(`/courses/${courseId}/modules/${objectiveId}/exercises`),

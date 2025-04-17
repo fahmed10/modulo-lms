@@ -69,6 +69,10 @@ router.post("/courses/:cId/modules/:oId/exercises/:eId/answer", authMiddleware()
     res.json({ correct: true });
 });
 
+router.patch("/courses/:cId", authMiddleware("faculty"), async (req, res) => {
+    res.json(await Courses.findOneAndUpdate({ code: req.params.cId }, req.body));
+});
+
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 

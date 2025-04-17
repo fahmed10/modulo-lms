@@ -13,7 +13,48 @@ export default function EditLearnPage() {
 
     const navigate = useNavigate();
     const { course: courseId } = useParams();
-    const [course, loaded] = useAxiosData<Course>(() => Api.getCourse(courseId!));
+    const [course, loaded, setCourse] = useAxiosData<Course>(() => Api.getCourse(courseId!));
+
+    async function syncCourse() {
+        setCourse({ ...course });
+        await Api.updateCourse(course.code, course);
+    }
+
+    async function addChapter() {
+        let number = 1;
+        while (course.chapters.map(c => c.number).includes(number)) {
+            number++;
+        }
+        course.chapters.push({ name: "New Chapter", number, learningObjectives: [] });
+        await syncCourse();
+    }
+
+    async function addObjective(chapter: Chapter) {
+        let id = 1;
+        while (chapter.learningObjectives.map(l => l.id).includes(id)) {
+            id++;
+        }
+        chapter.learningObjectives.push({ id, dataBlocks: [], description: "", title: "New Learning Objective" });
+        await syncCourse();
+    }
+
+    async function deleteChapter(chapter: Chapter) {
+        if (!confirm(`Are you sure you want to delete chapter ${chapter.number}?`)) {
+            return;
+        }
+
+        course.chapters = course.chapters.filter(c => c.number !== chapter.number);
+        await syncCourse();
+    }
+
+    async function deleteObjective(chapter: Chapter, objective: LearningObjective) {
+        if (!confirm(`Are you sure you want to delete learning objective ${objective.id}?`)) {
+            return;
+        }
+
+        chapter.learningObjectives = chapter.learningObjectives.filter(l => l.id !== objective.id);
+        await syncCourse();
+    }
 
     if (!loaded) {
         return <Loading />;
@@ -31,6 +72,8 @@ export default function EditLearnPage() {
                 <MUI.Accordion defaultExpanded key={chapter.number}>
                     <MUI.AccordionSummary expandIcon={<ExpandMore />}>
                         <MUI.Typography variant="h6">Chapter {chapter.number}: {chapter.name}</MUI.Typography>
+                        <div className="flex-1" />
+                        <MUI.Button onClick={() => deleteChapter(chapter)}>Delete</MUI.Button>
                     </MUI.AccordionSummary>
                     <MUI.Divider />
                     <MUI.AccordionDetails>
@@ -39,22 +82,23 @@ export default function EditLearnPage() {
                                 <GridCard key={objective.id}>
                                     <MUI.Typography>L.O. {objective.id}: {objective.title}</MUI.Typography>
                                     <div className="flex-1" />
+                                    <MUI.Button className="h-6" onClick={() => deleteObjective(chapter, objective)}>Delete</MUI.Button>
                                     <MUI.Button className="h-6" onClick={() => navigate(`${chapter.number}.${objective.id}`)}>Edit</MUI.Button>
                                 </GridCard>
                             ))}
-                            <GridButton>Add Learning Objective</GridButton>
+                            <GridButton onClick={() => addObjective(chapter)}>Add Learning Objective</GridButton>
                         </MUI.Box>
                     </MUI.AccordionDetails>
                 </MUI.Accordion>
             ))}
-            <GridButton elevation={0}>Add Chapter</GridButton>
+            <GridButton elevation={0} onClick={addChapter} className="mt-4">Add Chapter</GridButton>
         </MUI.Container>
     );
 };
 
-function GridButton({ onClick, elevation = 1, children }: PropsWithChildren<{ onClick?: () => void, elevation?: number }>) {
+function GridButton({ onClick, elevation = 1, children, className = "" }: PropsWithChildren<{ onClick?: () => void, elevation?: number, className?: string }>) {
     return (
-        <GridCard elevation={1} className="justify-center !shadow-none border border-slate-600 cursor-pointer" onClick={onClick}>
+        <GridCard elevation={elevation} className={"justify-center !shadow-none border border-slate-600 cursor-pointer " + className} onClick={onClick}>
             <Add className="text-blue-300" />
             <MUI.Typography className="text-blue-300">{children}</MUI.Typography>
         </GridCard>

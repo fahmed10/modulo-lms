@@ -11,7 +11,7 @@ import Loading from "../Loading";
 
 let currentCourseId: string, currentObjectiveId: string, currentExerciseStates: ExerciseState[] = [], refreshComponent: () => void;
 
-export default function LearnModule() {
+export default function LearnModule({ editing = false }: { editing?: boolean }) {
     const { course: courseId, id } = useParams();
     const navigate = useNavigate();
     const [exerciseStates, setExerciseStates] = useState([]);
@@ -33,7 +33,8 @@ export default function LearnModule() {
         return;
     }
 
-    const objective = course.learningObjectives.find(o => `${o.chapter.number}.${o.id}` === id)!;
+    const objective = course.chapters.find(c => c.number.toString() === id!.split('.')[0])!
+        .learningObjectives.find(o => o.id.toString() === id!.split('.')[1])!;
     currentCourseId = courseId!;
     currentObjectiveId = id!;
 
