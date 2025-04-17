@@ -8,7 +8,9 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import DependentRoute from "./DependentRoute";
 import LearnModule from "./modules/LearnModule";
+import AdminHome from "./pages/AdminHome";
 import CoursePage from "./pages/CoursePage";
+import ManageUsers from "./pages/ManageUsers";
 
 export const BROWSER_ROUTER = createBrowserRouter([
     {
@@ -40,7 +42,22 @@ export const BROWSER_ROUTER = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <DependentRoute student={<CoursesPage />} faculty={null} admin={null} />
+                element: <DependentRoute student={<CoursesPage />} faculty={null} admin={<AdminHome />} />
+            }
+        ]
+    },
+    {
+        path: "/manage",
+        element: <MainUI showAnnouncements />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: "users",
+                element: <ManageUsers />
+            },
+            {
+                index: true,
+                element: <Navigate to="users" />
             }
         ]
     },
