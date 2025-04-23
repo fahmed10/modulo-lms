@@ -47,19 +47,9 @@ export const BROWSER_ROUTER = createBrowserRouter([
         ]
     },
     {
-        path: "/manage",
-        element: <MainUI showAnnouncements />,
-        errorElement: <ErrorPage />,
-        children: [
-            {
-                path: "users",
-                element: <ManageUsers />
-            },
-            {
-                index: true,
-                element: <Navigate to="users" />
-            }
-        ]
+        path: "/manage-users",
+        element: <MainUI showAnnouncements content={<ManageUsers />} />,
+        errorElement: <ErrorPage />
     },
     {
         path: "/:course",
