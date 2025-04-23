@@ -6,7 +6,7 @@ const ADMIN_SECTIONS = [
     {
         title: "Manage Users",
         description: "Create, delete, and view accounts for faculty.",
-        path: "/manage/users"
+        path: "/manage-users"
     },
 ];
 

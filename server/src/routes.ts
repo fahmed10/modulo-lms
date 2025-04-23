@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import authMiddleware from "../middleware/auth";
 import Users from "../models/users";
 import { LearningObjective } from "../models/learningObjective";
+import { Chapter } from "../models/chapter";
 
 export const router = Router();
 
@@ -25,7 +26,7 @@ router.delete("/announcements/:id", authMiddleware("admin"), async (req, res) =>
 });
 
 router.get("/courses", authMiddleware(), async (req, res) => {
-    res.json(await Courses.find().select("-learningObjectives"));
+    res.json(await Courses.find().select("-chapters"));
 });
 
 router.get("/courses/:id", authMiddleware(), async (req, res) => {
@@ -35,7 +36,8 @@ router.get("/courses/:id", authMiddleware(), async (req, res) => {
 router.get("/courses/:cId/modules/:oId/exercises", authMiddleware(), async (req, res) => {
     const { cId, oId } = req.params;
     const course = (await Courses.findOne({ courseId: cId }))!;
-    const objective = (course.learningObjectives as any as any[]).find<LearningObjective>((lo: any): lo is LearningObjective => `${lo.chapter.number}.${lo.id}` === oId)!;
+    const objective = (course.chapters as any as any[]).find((c: Chapter) => c.number.toString() === oId.split('.')[0])
+        .learningObjectives.find((o: LearningObjective) => o.id.toString() === oId.split('.')[1]);
     const exercises: string[] = [];
 
     objective.dataBlocks.forEach(dataBlock => {
@@ -51,7 +53,8 @@ router.post("/courses/:cId/modules/:oId/exercises/:eId/answer", authMiddleware()
     const { cId, oId, eId } = req.params;
     const { answer } = req.body;
     const course = (await Courses.findOne({ courseId: cId }))!;
-    const objective = (course.learningObjectives as any as any[]).find<LearningObjective>((lo: any): lo is LearningObjective => `${lo.chapter.number}.${lo.id}` === oId)!;
+    const objective = (course.chapters as any as any[]).find((c: Chapter) => c.number.toString() === oId.split('.')[0])
+        .learningObjectives.find((o: LearningObjective) => o.id.toString() === oId.split('.')[1]);
 
     const dataBlock = objective.dataBlocks.filter(d => d.block === "exercise")[Number(eId) - 1];
     if (dataBlock.answers.includes(answer)) {
@@ -64,6 +67,10 @@ router.post("/courses/:cId/modules/:oId/exercises/:eId/answer", authMiddleware()
 
     await course.save();
     res.json({ correct: true });
+});
+
+router.patch("/courses/:cId", authMiddleware("faculty"), async (req, res) => {
+    res.json(await Courses.findOneAndUpdate({ code: req.params.cId }, req.body));
 });
 
 router.post("/login", async (req, res) => {

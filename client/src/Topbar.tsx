@@ -17,7 +17,9 @@ export default function Topbar({ showAnnouncements = false }: TopbarProps) {
             return `L.O. ${path}`;
         }
 
-        path = path.includes('-') ? path.replace('-', ' ').toUpperCase() : path.charAt(0).toUpperCase() + path.substring(1);
+        const isCourseCode = path.match(/^\w{4}-\d{3,4}\w?$/);
+        path = path.replace('-', ' ')
+        path = isCourseCode ? path.toUpperCase() : path.replace(/\b\w/g, c => c.toUpperCase());
         return path;
     }
 

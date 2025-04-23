@@ -11,6 +11,7 @@ import LearnModule from "./modules/LearnModule";
 import AdminHome from "./pages/AdminHome";
 import CoursePage from "./pages/CoursePage";
 import ManageUsers from "./pages/ManageUsers";
+import EditLearnPage from "./pages/EditLearnPage";
 
 export const BROWSER_ROUTER = createBrowserRouter([
     {
@@ -42,7 +43,7 @@ export const BROWSER_ROUTER = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <DependentRoute student={<CoursesPage />} faculty={null} admin={<AdminHome />} />
+                element: <DependentRoute student={<CoursesPage />} faculty={<CoursesPage faculty />} admin={<AdminHome />} />
             }
         ]
     },
@@ -53,12 +54,12 @@ export const BROWSER_ROUTER = createBrowserRouter([
     },
     {
         path: "/:course",
-        element: <MainUI showAnnouncements showSidebar />,
+        element: <DependentRoute student={<MainUI showAnnouncements showSidebar />} faculty={<MainUI showAnnouncements showSidebar faculty />} />,
         errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
-                element: <CoursePage />
+                element: <DependentRoute student={<CoursePage />} faculty={<CoursePage faculty />} />
             },
             {
                 path: "learn",
@@ -71,6 +72,14 @@ export const BROWSER_ROUTER = createBrowserRouter([
             {
                 path: "learn/:id",
                 element: <LearnModule />
+            },
+            {
+                path: "manage-activities/:id",
+                element: <LearnModule editing />
+            },
+            {
+                path: "manage-activities",
+                element: <EditLearnPage />
             }
         ]
     },
