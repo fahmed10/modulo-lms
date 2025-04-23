@@ -1,7 +1,7 @@
 import * as MUI from "@mui/material";
 import { useRef, useState } from "react";
 import { MathIn } from "../Components";
-import MathInput from "../../MathInput";
+import MathInput from "../../components/MathInput";
 import { ExerciseProps } from "./ExerciseProps";
 import ExerciseHeader from "./ExerciseHeader";
 import { renderRichText, standardizeMathText } from "../../MathUtils";

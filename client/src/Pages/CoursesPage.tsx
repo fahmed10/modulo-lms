@@ -2,8 +2,8 @@ import * as MUI from "@mui/material";
 import { Api, Course } from "../Api";
 import useAxiosData from "../hooks/useAxiosData";
 import { useNavigate } from "react-router";
-import Loading from "../Loading";
-import PageContainer from "./PageContainer";
+import Loading from "../components/Loading";
+import PageContainer from "../components/PageContainer";
 
 export default function CoursesPage({ faculty = false }: { faculty?: boolean }) {
     const navigate = useNavigate();

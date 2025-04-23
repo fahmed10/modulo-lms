@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Api } from "../Api";
 import { PersistentStorage } from "../PersistentStorage";
-import PageContainer from "./PageContainer";
+import PageContainer from "../components/PageContainer";
 
 export default function SignupPage() {
     const [email, setEmail] = useState("");

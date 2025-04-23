@@ -3,10 +3,10 @@ import { PageUtils } from "./PageUtils";
 import useAxiosData from '../hooks/useAxiosData';
 import { Api, Chapter, Course, LearningObjective } from '../Api';
 import { useNavigate, useParams } from 'react-router';
-import GridCard from './../GridCard';
-import { Add, ExpandMore } from '@mui/icons-material';
-import Loading from '../Loading';
-import { PropsWithChildren } from 'react';
+import GridCard from '../components/GridCard';
+import { ExpandMore } from '@mui/icons-material';
+import Loading from '../components/Loading';
+import { GridButton } from '../components/GridButton';
 
 export default function EditLearnPage() {
     PageUtils.setTitle("Manage");
@@ -95,12 +95,3 @@ export default function EditLearnPage() {
         </MUI.Container>
     );
 };
-
-function GridButton({ onClick, elevation = 1, children, className = "" }: PropsWithChildren<{ onClick?: () => void, elevation?: number, className?: string }>) {
-    return (
-        <GridCard elevation={elevation} className={"justify-center !shadow-none border border-slate-600 cursor-pointer " + className} onClick={onClick}>
-            <Add className="text-blue-300" />
-            <MUI.Typography className="text-blue-300">{children}</MUI.Typography>
-        </GridCard>
-    );
-}

@@ -1,4 +1,4 @@
-import { BookOnlineOutlined, BookOutlined, HelpCenterOutlined } from "@mui/icons-material";
+import { BookOutlined, HelpCenterOutlined } from "@mui/icons-material";
 
 export interface Section {
     name: string,

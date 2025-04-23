@@ -7,7 +7,7 @@ import { ChemBlock, ChemIn, MathIn, Header, MathBlock, Text, renderSequential } 
 import MathExercise from "./exercises/MathExercise";
 import { useEffect, useState } from "react";
 import { ExerciseState } from "./exercises/ExerciseProps";
-import Loading from "../Loading";
+import Loading from "../components/Loading";
 
 let currentCourseId: string, currentObjectiveId: string, currentExerciseStates: ExerciseState[] = [], refreshComponent: () => void;
 

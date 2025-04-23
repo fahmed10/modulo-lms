@@ -1,6 +1,6 @@
 import * as MUI from "@mui/material";
 import { useNavigate } from "react-router";
-import PageContainer from "./PageContainer";
+import PageContainer from "../components/PageContainer";
 
 const ADMIN_SECTIONS = [
     {

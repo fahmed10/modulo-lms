@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { Api } from "../Api";
 import { PersistentStorage } from "../PersistentStorage";
 import { useSearchParams } from "react-router-dom";
-import PageContainer from "./PageContainer";
+import PageContainer from "../components/PageContainer";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");

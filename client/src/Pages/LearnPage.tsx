@@ -3,9 +3,9 @@ import { PageUtils } from "./PageUtils";
 import useAxiosData from '../hooks/useAxiosData';
 import { Api, Course } from '../Api';
 import { useNavigate, useParams } from 'react-router';
-import GridCard from './../GridCard';
+import GridCard from '../components/GridCard';
 import { ExpandMore } from '@mui/icons-material';
-import Loading from '../Loading';
+import Loading from '../components/Loading';
 
 export default function LearnPage() {
     PageUtils.setTitle("Learn");

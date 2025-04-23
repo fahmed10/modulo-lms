@@ -4,8 +4,8 @@ import { useNavigate, useParams } from "react-router";
 import { PageUtils } from "./PageUtils";
 import useAxiosData from "../hooks/useAxiosData";
 import { Api, Course } from "../Api";
-import Loading from "../Loading";
-import PageContainer from "./PageContainer";
+import Loading from "../components/Loading";
+import PageContainer from "../components/PageContainer";
 
 export default function CoursePage({ faculty = false }: { faculty?: boolean }) {
     const navigate = useNavigate();

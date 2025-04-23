@@ -1,6 +1,6 @@
 import * as MUI from "@mui/material"
-import MathInput from "../MathInput";
-import SectionLink from "../SectionLink";
+import MathInput from "../components/MathInput";
+import SectionLink from "../components/SectionLink";
 import { Header, Text } from "../modules/Components";
 import { PageUtils } from "./PageUtils";
 

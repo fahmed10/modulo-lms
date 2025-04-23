@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { EditableMathField } from "react-mathquill";
-import { Chem } from "./Chem";
+import { Chem } from "../Chem";
 
 export default function MathInput({editable = true, defaultLatex = "", output}: MathInputProps) {
     const [latex, setLatex] = useState(defaultLatex);

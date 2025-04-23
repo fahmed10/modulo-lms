@@ -1,4 +1,4 @@
-import { SECTIONS } from "./Data";
+import { SECTIONS } from "../Data";
 import IconLink from "./IconLink";
 
 export default function SectionLink(props: { section: keyof typeof SECTIONS }) {
