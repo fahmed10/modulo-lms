@@ -117,6 +117,28 @@ router.post("/signup", async (req, res) => {
     res.sendStatus(200);
 });
 
-router.get("/users", async (req, res) => {
+router.get("/users", authMiddleware("admin"), async (req, res) => {
     res.json(await Users.find().select("-password"));
 })
+
+router.put("/users", authMiddleware("admin"), async (req, res) => {
+    const { email, password, firstName, lastName, role = "student" } = req.body;
+
+    if (!email || !password || !firstName || !lastName) {
+        res.json({ error: "Email, password, first name, and last name are required." });
+        return;
+    }
+
+    try {
+        res.json(await Users.create({ firstName, lastName, email, password, role }));
+    } catch (error) {
+        if (error?.code === 11000 && "email" in error.errorResponse.keyPattern) {
+            res.json({ error: "Email already in use. Try logging in." });
+            return;
+        }
+    }
+});
+
+router.delete("/users/:id", authMiddleware("admin"), async (req, res) => {
+    res.json(await Users.findByIdAndDelete(req.params.id));
+});

@@ -16,12 +16,13 @@ export default function AdminHome() {
     return (
         <PageContainer title="Control Panel">
             {ADMIN_SECTIONS.map(section => (
-                <MUI.Card key={section.title} className="w-72 max-w-72">
+                <MUI.Card key={section.title} className="w-72 max-w-72 flex flex-col">
                     <MUI.CardContent>
                         <MUI.Typography variant="h5" className="flex justify-center items-center gap-2" textAlign="center">{section.title}</MUI.Typography>
                         <MUI.Divider className="!my-1" />
                         <MUI.Typography color="text.secondary">{section.description}</MUI.Typography>
                     </MUI.CardContent>
+                    <div className="flex-1" />
                     <MUI.CardActions>
                         <MUI.Button onClick={() => navigate(section.path)}>Open</MUI.Button>
                     </MUI.CardActions>

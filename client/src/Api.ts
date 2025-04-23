@@ -104,5 +104,7 @@ export const Api = {
     signup: (email: string, password: string, firstName: string, lastName: string) => api.post("signup", { email, password, firstName, lastName }),
     getExerciseStates: (courseId: Value, objectiveId: Value) => api.get(`/courses/${courseId}/modules/${objectiveId}/exercises`),
     answerExercise: (courseId: Value, objectiveId: Value, exerciseId: Value, answer: string) => api.post(`/courses/${courseId}/modules/${objectiveId}/exercises/${exerciseId}/answer`, { answer }),
-    getUsers: () => api.get("users")
+    getUsers: () => api.get("users"),
+    createUser: (data: User & { password: string }) => api.put("users", data),
+    deleteUser: (id: string) => api.delete(`users/${id}`),
 };
