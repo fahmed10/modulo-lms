@@ -116,3 +116,7 @@ router.post("/signup", async (req, res) => {
 
     res.sendStatus(200);
 });
+
+router.get("/users", async (req, res) => {
+    res.json(await Users.find().select("-password"));
+})

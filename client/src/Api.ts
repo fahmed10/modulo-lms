@@ -22,7 +22,7 @@ api.interceptors.response.use(response => response, errorResponse => {
         PersistentStorage.delete("current_user");
         window.location.href = "/login";
     }
-    
+
     return Promise.reject(errorResponse);
 });
 
@@ -30,6 +30,13 @@ export type UserRole = "student" | "faculty" | "admin";
 
 export interface MongoObject {
     _id: string
+}
+
+export interface User extends MongoObject {
+    firstName: string,
+    lastName: string,
+    email: string,
+    role: UserRole
 }
 
 export interface Announcement extends MongoObject {
@@ -94,7 +101,8 @@ export const Api = {
     getCourse: (id: string) => api.get(`courses/${id}`),
     updateCourse: (id: string, data: Course) => api.patch(`courses/${id}`, data),
     login: (email: string, password: string) => api.post("login", { email, password }),
-    signup: (email: string, password: string, firstName: string, lastName: string) => api.post("signup", {email, password, firstName, lastName}),
+    signup: (email: string, password: string, firstName: string, lastName: string) => api.post("signup", { email, password, firstName, lastName }),
     getExerciseStates: (courseId: Value, objectiveId: Value) => api.get(`/courses/${courseId}/modules/${objectiveId}/exercises`),
     answerExercise: (courseId: Value, objectiveId: Value, exerciseId: Value, answer: string) => api.post(`/courses/${courseId}/modules/${objectiveId}/exercises/${exerciseId}/answer`, { answer }),
+    getUsers: () => api.get("users")
 };
