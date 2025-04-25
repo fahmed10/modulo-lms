@@ -73,7 +73,7 @@ export default function EditLearnPage() {
                     <MUI.AccordionSummary expandIcon={<ExpandMore />}>
                         <MUI.Typography variant="h6">Chapter {chapter.number}: {chapter.name}</MUI.Typography>
                         <div className="flex-1" />
-                        <MUI.Button onClick={() => deleteChapter(chapter)}>Delete</MUI.Button>
+                        <MUI.Button onClick={e => { e.stopPropagation(); deleteChapter(chapter); }}>Delete</MUI.Button>
                     </MUI.AccordionSummary>
                     <MUI.Divider />
                     <MUI.AccordionDetails>
