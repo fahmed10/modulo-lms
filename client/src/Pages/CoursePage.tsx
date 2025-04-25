@@ -1,14 +1,16 @@
 import * as MUI from "@mui/material";
-import { FACULTY_SECTIONS, SECTIONS } from "../Data";
+import { SECTIONS } from "../Sections";
 import { useNavigate, useParams } from "react-router";
 import { PageUtils } from "./PageUtils";
 import useAxiosData from "../hooks/useAxiosData";
 import { Api, Course } from "../Api";
 import Loading from "../components/Loading";
 import PageContainer from "../components/PageContainer";
+import useUserInfo from "../hooks/useUserInfo";
 
-export default function CoursePage({ faculty = false }: { faculty?: boolean }) {
+export default function CoursePage() {
     const navigate = useNavigate();
+    const { role } = useUserInfo();
     const { course: courseId } = useParams();
     const [course, loaded] = useAxiosData<Course>(() => Api.getCourse(courseId!));
 
@@ -25,7 +27,7 @@ export default function CoursePage({ faculty = false }: { faculty?: boolean }) {
 
     return (
         <PageContainer title={course.title}>
-            {Object.values(faculty ? FACULTY_SECTIONS : SECTIONS).map(section => (
+            {SECTIONS[role].map(section => (
                 <MUI.Card key={section.name} className="w-72 max-w-72">
                     <MUI.CardContent>
                         <MUI.Typography variant="h5" className="flex justify-center items-center gap-2" textAlign="center">{section.name} {section.icon}</MUI.Typography>
