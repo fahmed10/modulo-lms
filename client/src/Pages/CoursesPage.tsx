@@ -4,8 +4,10 @@ import useAxiosData from "../hooks/useAxiosData";
 import { useNavigate } from "react-router";
 import Loading from "../components/Loading";
 import PageContainer from "../components/PageContainer";
+import useUserInfo from "../hooks/useUserInfo";
 
-export default function CoursesPage({ faculty = false }: { faculty?: boolean }) {
+export default function CoursesPage() {
+    const { role } = useUserInfo();
     const navigate = useNavigate();
     const [courses, loaded] = useAxiosData<Course[]>(Api.getCourses, []);
 
@@ -22,7 +24,7 @@ export default function CoursesPage({ faculty = false }: { faculty?: boolean }) 
                         <MUI.Typography className="text-center" color="text.secondary">{course.title}</MUI.Typography>
                     </MUI.CardContent>
                     <MUI.CardActions>
-                        <MUI.Button onClick={() => navigate(`/${course.code}`)}>{faculty ? "Manage" : "Open"}</MUI.Button>
+                        <MUI.Button onClick={() => navigate(`/${course.code}`)}>{role === "faculty" ? "Manage" : "Open"}</MUI.Button>
                     </MUI.CardActions>
                 </MUI.Card>
             ))}

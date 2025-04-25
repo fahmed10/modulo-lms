@@ -38,32 +38,32 @@ export const BROWSER_ROUTER = createBrowserRouter([
     },
     {
         path: "/home",
-        element: <MainUI showAnnouncements />,
+        element: <DependentRoute admin={<MainUI showAnnouncements showSidebar />} other={<MainUI showAnnouncements />} />,
         errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
-                element: <DependentRoute student={<CoursesPage />} faculty={<CoursesPage faculty />} admin={<AdminHome />} />
+                element: <DependentRoute admin={<AdminHome />} other={<CoursesPage />} />
             }
         ]
     },
     {
         path: "/manage-users",
-        element: <MainUI showAnnouncements content={<ManageUsers />} />,
+        element: <MainUI showAnnouncements showSidebar content={<ManageUsers />} />,
         errorElement: <ErrorPage />
     },
     {
         path: "/:course",
-        element: <DependentRoute student={<MainUI showAnnouncements showSidebar />} faculty={<MainUI showAnnouncements showSidebar faculty />} />,
+        element: <MainUI showAnnouncements showSidebar />,
         errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
-                element: <DependentRoute student={<CoursePage />} faculty={<CoursePage faculty />} />
+                element: <CoursePage />
             },
             {
                 path: "learn",
-                element: <LearnPage />,
+                element: <LearnPage />
             },
             {
                 path: "guide",
